@@ -1,9 +1,9 @@
 name: Scrape NBA ATS Trends
 
 on:
-  schedule:
-    - cron: "0 9 * * *"  #every day at 9 AM UTC (4am EST)
   workflow_dispatch:
+  schedule:
+    - cron: "0 11 * * *"
 
 jobs:
   run-scraper:
