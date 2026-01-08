@@ -3,7 +3,7 @@ name: Scrape NBA ATS Trends
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 11 * * *"
+    - cron: "0 9 * * *"
 
 jobs:
   run-scraper:
