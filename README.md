@@ -18,16 +18,38 @@ This project enables:
 
 ---
 
-## 🧠 System Design (High Level)
-Python Scraper
-↓
-PostgreSQL (Supabase)
-↓
-Analytics Views
-↓
-REST API
-↓
-Google Sheets Dashboards
+## 🧠 System Architecture
+
+Scraper → Database → Views → API → Google Sheets
+
+1. **Python Scraper**
+   - Scrapes ATS trends by league
+   - Normalizes rows and computes hashes
+   - Writes immutable historical records
+
+2. **PostgreSQL (Supabase)**
+   - `ats_trends` table stores all historical snapshots
+   - `scrape_runs` tracks each ingestion run
+   - SQL views expose:
+     - latest snapshots
+     - flat historical data
+     - typed numeric fields for analytics
+
+3. **REST API (Supabase PostgREST)**
+   - Google Sheets queries data via HTTP
+   - Supports filters by league, date, and team
+
+4. **Google Sheets**
+   - Acts as a BI/analytics front-end
+   - Supports:
+     - latest snapshots
+     - historical views
+     - dynamic “X days ago” queries
+
+5. **Automation**
+   - GitHub Actions runs the scraper on a schedule
+   - Google Apps Script refreshes Sheets automatically
+
 
 
 ---
